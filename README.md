@@ -1,6 +1,6 @@
 # Joom
 
-NodeJs, WebRTC, Websockets 을 사용하여 화상 통화 소프트웨어 Zoom 클론코딩.
+nodejs, Express, WebRTC, Websockets 을 사용하여 화상 통화 소프트웨어 Zoom 클론코딩.
 
 # Use
 
