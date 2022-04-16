@@ -12,7 +12,9 @@ nodejs, Express, WebRTC, Websockets 을 사용하여 화상 통화 소프트웨�
 
 ## WebRTC
 
-## Websockets
+## Websockets (ws: a Node.js WebSocket library)
+
+- Node.js에서 WebSocket을 사용할 수 있게 해주는 라이브러리 입니다.
 
 # Dependencies
 

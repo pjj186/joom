@@ -1,3 +1,5 @@
+import http from "http";
+import WebSocket, { WebSocketServer } from "ws";
 import express from "express";
 
 const PORT = 4000;
@@ -9,6 +11,13 @@ app.use("/public", express.static(__dirname + "/public")); // Express 정적 파
 // __dirname : 현재 이 파일이 있는 폴더 경로
 
 app.get("/", (req, res) => res.render("home")); // home.pug 렌더링
+app.get("/*", (req, res) => res.redirect("/"));
 
 const handleListen = () => console.log(`Listening on http://localhost:${PORT}`);
-app.listen(PORT, handleListen);
+
+const server = http.createServer(app); // http 서버 생성
+const wss = new WebSocketServer({
+  server,
+}); // websocket 서버 생성 (http 서버 위에)
+
+server.listen(PORT, handleListen);
