@@ -1,5 +1,5 @@
 import http from "http";
-import WebSocket, { WebSocketServer } from "ws";
+import { WebSocketServer } from "ws";
 import express from "express";
 
 const PORT = 4000;
@@ -20,10 +20,16 @@ const wss = new WebSocketServer({
   server,
 }); // websocket 서버 생성 (http 서버 위에)
 
-function handleConnection(socket) {
-  console.log(socket);
-}
-
-wss.on("connection", handleConnection); // WebSocketServer접속 성공 시 handleConnection 함수 호출
+wss.on("connection", (socket) => {
+  // 프론트쪽에서 보내는 socket
+  console.log("Connected to Browser ✅");
+  socket.on("close", () => {
+    console.log("Disconnected from Browser ❌");
+  });
+  socket.on("message", (message) => {
+    console.log(message.toString("utf-8"));
+  });
+  socket.send("hello!!!"); // 서버에서 프론트로 메시지 전송
+});
 
 server.listen(PORT, handleListen);
