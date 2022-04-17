@@ -1,4 +1,4 @@
-const socket = new WebSocket(`ws://${window.location.host}`); // 프론트엔드단의 소켓
+const socket = new WebSocket(`ws://${window.location.host}`); // 프론트엔드단의 소켓 서버의 "/" Route로 소켓을 보내고있음
 
 socket.addEventListener("open", () => {
   console.log("Connected to Server ✅");
