@@ -20,4 +20,10 @@ const wss = new WebSocketServer({
   server,
 }); // websocket 서버 생성 (http 서버 위에)
 
+function handleConnection(socket) {
+  console.log(socket);
+}
+
+wss.on("connection", handleConnection); // WebSocketServer접속 성공 시 handleConnection 함수 호출
+
 server.listen(PORT, handleListen);
