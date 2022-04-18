@@ -20,16 +20,20 @@ const wss = new WebSocketServer({
   server,
 }); // websocket 서버 생성 (http 서버 위에)
 
+const sockets = [];
+
 wss.on("connection", (socket) => {
   // 프론트쪽에서 보내는 socket
+  // 여기서 socket.send() 를 사용하면 프론트쪽으로 값을 보냄
+  sockets.push(socket);
   console.log("Connected to Browser ✅");
   socket.on("close", () => {
     console.log("Disconnected from Browser ❌");
   });
   socket.on("message", (message) => {
-    console.log(message.toString("utf-8"));
+    // 프론트단에서 넘어오는 메시지를 처리하는 곳
+    sockets.forEach((aSocket) => aSocket.send(message.toString("utf-8")));
   });
-  socket.send("hello!!!"); // 서버에서 프론트로 메시지 전송
 });
 
 server.listen(PORT, handleListen);
