@@ -16,6 +16,10 @@ nodejs, Express, WebRTC, Websockets 을 사용하여 화상 통화 소프트웨�
 
 - Node.js에서 WebSocket을 사용할 수 있게 해주는 라이브러리 입니다.
 
+## SocketIO
+
+- 실시간 기능을 쉽게 만들 수 있게 해주는 프레임워크
+
 # Dependencies
 
 - nodemon : 자바 스크립트 파일들이 수정 될 때 마다 서버를 껐다 켰다 하며 확인해야하는데, nodemon을 이용하면 이 번거로움에서 해방시켜줍니다.
