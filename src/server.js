@@ -19,7 +19,12 @@ const httpServer = http.createServer(app); // http 서버 생성
 const wsServer = SocketIO(httpServer);
 
 wsServer.on("connection", (socket) => {
-  console.log(socket);
+  socket.on("enter_room", (msg, done) => {
+    console.log(msg);
+    setTimeout(() => {
+      done();
+    }, 10000);
+  });
 });
 
 // const sockets = [];
