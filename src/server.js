@@ -18,9 +18,25 @@ const handleListen = () => console.log(`Listening on http://localhost:${PORT}`);
 const httpServer = http.createServer(app); // http 서버 생성
 const wsServer = SocketIO(httpServer);
 
+const publicRooms = () => {
+  const {
+    socket: {
+      adapter: { sids, rooms },
+    },
+  } = wsServer; // sids : socket id들만 / rooms:  socket id, room 전부
+  const publicRooms = [];
+  rooms.forEach((_, key) => {
+    if (sids.get(key) === undefined) {
+      publicRooms.push(key);
+    }
+  });
+  return publicRooms;
+};
+
 wsServer.on("connection", (socket) => {
   socket["nickname"] = "Anon";
   socket.onAny((event) => {
+    console.log(wsServer.sockets.adapter);
     console.log(`Socket Event:${event}`);
   });
   socket.on("enter_room", (roomName, done) => {
