@@ -24,8 +24,19 @@ wsServer.on("connection", (socket) => {
   });
   socket.on("enter_room", (roomName, done) => {
     socket.join(roomName);
-    done();
+    done(); // 실행 위치 : 프론트엔드
     socket.to(roomName).emit("welcome"); // 나를 제외한 다른 사람들이 봄
+  });
+  socket.on("disconnecting", () => {
+    console.log(socket.rooms);
+    socket.rooms.forEach((room) => {
+      console.log(room);
+      socket.to(room).emit("bye");
+    });
+  });
+  socket.on("new_message", (msg, room, done) => {
+    socket.to(room).emit("new_message", msg);
+    done(); // 실행 위치 : 프론트엔드
   });
 });
 
