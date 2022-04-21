@@ -63,7 +63,6 @@ wsServer.on("connection", (socket) => {
 
   socket.on("disconnecting", () => {
     socket.rooms.forEach((room) => {
-      console.log(room);
       socket.to(room).emit("bye", socket.nickname, countRoom(room) - 1);
     });
   });
