@@ -20,7 +20,7 @@ const wsServer = SocketIO(httpServer);
 
 const publicRooms = () => {
   const {
-    socket: {
+    sockets: {
       adapter: { sids, rooms },
     },
   } = wsServer; // sids : socket id들만 / rooms:  socket id, room 전부
@@ -36,21 +36,27 @@ const publicRooms = () => {
 wsServer.on("connection", (socket) => {
   socket["nickname"] = "Anon";
   socket.onAny((event) => {
-    console.log(wsServer.sockets.adapter);
     console.log(`Socket Event:${event}`);
   });
+
   socket.on("enter_room", (roomName, done) => {
     socket.join(roomName);
     done(); // 실행 위치 : 프론트엔드
     socket.to(roomName).emit("welcome", socket.nickname); // 나를 제외한 다른 사람들이 봄
+    wsServer.sockets.emit("room_change", publicRooms());
   });
+
   socket.on("disconnecting", () => {
-    console.log(socket.rooms);
     socket.rooms.forEach((room) => {
       console.log(room);
       socket.to(room).emit("bye", socket.nickname);
     });
   });
+
+  socket.on("disconnect", () => {
+    wsServer.sockets.emit("room_change", publicRooms());
+  });
+
   socket.on("new_message", (msg, room, done) => {
     socket.to(room).emit("new_message", `${socket.nickname}: ${msg}`);
     done(); // 실행 위치 : 프론트엔드
