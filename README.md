@@ -6,6 +6,8 @@ nodejs, Express, WebRTC, Websockets 을 사용하여 화상 통화 소프트웨�
 
 ## Express
 
+- Node.js를 위한 빠르고 개방적인 간결한 웹 프레임워크
+
 ## Pug
 
 - Pug는 템플릿 엔진입니다. HTML의 정적인 단점을 개선하여 반복문, 조건문, 변수 등을 사용할 수 있고 동적인 페이지 작성이 가능합니다.
