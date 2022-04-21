@@ -22,6 +22,8 @@ nodejs, Express, WebRTC, Websockets 을 사용하여 화상 통화 소프트웨�
 - 실시간, 양방향, event 기반의 통신을 가능하게 해줍니다.
 - websocket보다 탄력성이 뛰어납니다. 이 의미는 SocketIO가 websocket을 이용한 연결에 실패를 해도, socketIO는 다른 방법을 찾을거라는 의미입니다.
 - SocketIO는 기본적으로 websocket을 이용하지만, websocket 연결을 할 수 없는 경우 HTTP long polling을 사용합니다. (신뢰성)
+- Server API : https://socket.io/docs/v4/server-api/
+- Client API : https://socket.io/docs/v4/client-api/
 
 # Dependencies
 
