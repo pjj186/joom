@@ -34,6 +34,7 @@ const publicRooms = () => {
 };
 
 wsServer.on("connection", (socket) => {
+  wsServer.sockets.emit("room_change", publicRooms());
   socket["nickname"] = "Anon";
   socket.onAny((event) => {
     console.log(`Socket Event:${event}`);
