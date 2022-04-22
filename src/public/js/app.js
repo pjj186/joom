@@ -4,10 +4,28 @@ const welcome = document.getElementById("welcome");
 const form = welcome.querySelector("#enter");
 const room = document.getElementById("room");
 const nameForm = document.querySelector("#name");
+const myFace = document.getElementById("myFace");
+const muteBtn = document.getElementById("mute");
+const cameraBtn = document.getElementById("camera");
 
 room.hidden = true;
 
 let roomName;
+let myStream;
+let muted = false;
+let cameraOff = false;
+
+const getMedia = async () => {
+  try {
+    myStream = await navigator.mediaDevices.getUserMedia({
+      audio: false,
+      video: true,
+    });
+    myFace.srcObject = myStream;
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 const addMessage = (message) => {
   const ul = room.querySelector("ul");
@@ -37,6 +55,7 @@ const handleNicknameSubmit = (event) => {
 const showRoom = (newCount) => {
   welcome.hidden = true;
   room.hidden = false;
+  getMedia();
   const h3 = room.querySelector("h3");
   h3.innerText = `Room ${roomName} (${newCount})`;
   const msgForm = room.querySelector("#msg");
@@ -52,8 +71,30 @@ const handleRoomSubmit = (event) => {
   input.value = "";
 };
 
+const handleMuteClick = () => {
+  if (!muted) {
+    muteBtn.innerText = "Unmute";
+    muted = true;
+  } else {
+    muteBtn.innerText = "Mute";
+    muted = false;
+  }
+};
+
+const handleCameraClick = () => {
+  if (cameraOff) {
+    cameraBtn.innerText = "Turn Camera Off";
+    cameraOff = false;
+  } else {
+    cameraBtn.innerText = "Turn Camera On";
+    cameraOff = true;
+  }
+};
+
 form.addEventListener("submit", handleRoomSubmit);
 nameForm.addEventListener("submit", handleNicknameSubmit);
+muteBtn.addEventListener("click", handleMuteClick);
+cameraBtn.addEventListener("click", handleCameraClick);
 
 socket.on("welcome", (user, newCount) => {
   const h3 = room.querySelector("h3");

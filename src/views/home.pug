@@ -22,8 +22,13 @@ html(lang="en")
                 h4 Open Rooms:
                 ul
             div#room
+                div#myStream
+                    video#myFace(autoplay, playsinline)
+                    br
+                    button#mute Mute
+                    button#camera Turn Camera
                 h3
-                ul        
+                ul   
                 form#msg
                     input(placeholder="message", required, type="text")
                     Button Send
