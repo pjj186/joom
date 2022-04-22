@@ -14,6 +14,10 @@ nodejs, Express, WebRTC, Websockets 을 사용하여 화상 통화 소프트웨�
 
 ## WebRTC
 
+- WebRTC는 web Real-Time Communication을 뜻합니다.
+- 실시간 커뮤니케이션을 가능하게 해주는 기술
+- peer to peer (P2P) 커뮤니케이션 가능 ( 서버를 거치치않고 상대방에게 직접 바로 감)
+
 ## Websockets (ws: a Node.js WebSocket library)
 
 - Node.js에서 WebSocket을 사용할 수 있게 해주는 라이브러리 입니다.
