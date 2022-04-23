@@ -16,6 +16,13 @@ let roomName;
 let myPeerConnection;
 let myDataChannel;
 
+const createMessage = (msg) => {
+  const li = document.createElement("li");
+  li.innerText = msg;
+  const ul = document.querySelector("#messages ul");
+  ul.appendChild(li);
+};
+
 const getCameras = async () => {
   // 현재 컴퓨터에 연결된 카메라 장치 select에 추가해주는 함수
   try {
@@ -131,7 +138,7 @@ welcomeForm.addEventListener("submit", handleWelcomeSubmit);
 socket.on("welcome", async () => {
   myDataChannel = myPeerConnection.createDataChannel("chat");
   myDataChannel.addEventListener("message", (event) => {
-    console.log(event.data);
+    createMessage(`Friend : ${event.data}`);
   });
   console.log("made data channel");
   const offer = await myPeerConnection.createOffer();
@@ -144,7 +151,7 @@ socket.on("offer", async (offer) => {
   myPeerConnection.addEventListener("datachannel", (event) => {
     myDataChannel = event.channel;
     myDataChannel.addEventListener("message", (event) => {
-      console.log(event.data);
+      createMessage(`Friend : ${event.data}`);
     });
   });
   console.log("received the offer");
@@ -165,6 +172,19 @@ socket.on("ice", (ice) => {
   console.log("reeceived candidate");
   myPeerConnection.addIceCandidate(ice);
 });
+
+// Chat Code
+const chat = document.querySelector("#chatInput form");
+
+const handleChatSend = (event) => {
+  event.preventDefault();
+  const input = chat.querySelector("input");
+  myDataChannel.send(input.value);
+  createMessage(`You : ${input.value}`);
+  input.value = "";
+};
+
+chat.addEventListener("submit", handleChatSend);
 
 // RTC Code
 

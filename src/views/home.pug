@@ -30,6 +30,13 @@ html(lang="en")
                                 button#mute Mute
                                 button#camera Turn Camera
                                 select#cameras
+                            div#chat
+                                div#messages
+                                    ul
+                                div#chatInput
+                                    form
+                                        input(placeholder="message", required, type="text")
+                                        button Send
 
         script(src="/socket.io/socket.io.js")    
         script(src="/public/js/app.js")
