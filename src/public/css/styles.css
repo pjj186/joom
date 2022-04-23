@@ -1,0 +1,100 @@
+body {
+  background-color: #f3f4f6;
+  box-sizing: border-box;
+}
+
+#bg {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+#container {
+  border: 1px solid black;
+  width: 1200px;
+  height: 900px;
+}
+
+main {
+  height: 518px;
+}
+
+#welcome {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#welcome form {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#welcome form input {
+  font-size: 24px;
+  width: 150px;
+}
+
+button {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 125px;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#call {
+  height: 100%;
+}
+
+#title {
+  margin-left: 50px;
+  font-size: 36px;
+  font-weight: 600;
+}
+
+#videoContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#myStream {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#videoContainer p {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+#videoOptions {
+  display: flex;
+  justify-content: center;
+}
+
+#videoOptions button {
+  margin-right: 10px;
+}

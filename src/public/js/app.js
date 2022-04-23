@@ -5,6 +5,7 @@ const muteBtn = document.getElementById("mute");
 const cameraBtn = document.getElementById("camera");
 const cameraSelect = document.getElementById("cameras");
 const call = document.getElementById("call");
+const title = document.getElementById("title");
 
 call.hidden = true;
 
@@ -105,10 +106,11 @@ cameraSelect.addEventListener("input", handleCameraChange);
 const welcome = document.getElementById("welcome");
 const welcomeForm = welcome.querySelector("form");
 
-const initCall = async () => {
+const initCall = async (roomName) => {
   // 방에 들어가면 실행 될 함수
-  welcome.hidden = true;
+  welcome.style.display = "none";
   call.hidden = false;
+  title.innerText = `Room : ${roomName}`;
   await getMedia();
   makeConnection();
 };
@@ -116,9 +118,9 @@ const initCall = async () => {
 const handleWelcomeSubmit = async (event) => {
   event.preventDefault();
   const input = welcomeForm.querySelector("input");
-  await initCall();
-  socket.emit("join_room", input.value);
   roomName = input.value;
+  await initCall(roomName);
+  socket.emit("join_room", input.value);
   input.value = "";
 };
 
