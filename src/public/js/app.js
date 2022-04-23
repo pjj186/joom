@@ -85,6 +85,14 @@ const handleCameraClick = () => {
 
 const handleCameraChange = async () => {
   await getMedia(cameraSelect.value);
+  if (myPeerConnection) {
+    const videoTrack = myStream.getVideoTracks()[0];
+    // Senders : 다른 브라우저로 보내진 비디오와 오디오 데이터를 컨트롤하는 방법
+    const videoSender = myPeerConnection
+      .getSenders()
+      .find((sender) => sender.track.kind === "video");
+    videoSender.replaceTrack(videoTrack);
+  }
 };
 
 muteBtn.addEventListener("click", handleMuteClick);
